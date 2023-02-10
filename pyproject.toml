@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "proving"
 version = "0.1.0"
-description = ""
+description = "library to calculate random uncertanity of a measurment sequence"
 authors = ["StigHaraldGustavsen <stighg@gmail.com>"]
 readme = "README.md"
 

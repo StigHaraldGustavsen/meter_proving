@@ -3,8 +3,8 @@ from math import gamma
 from numba import njit, prange
 
 
-def pdf_student_t(dof, t):
-    """"""
+def pdf_student_t(dof: int, t: np.array):
+    """returns a np.array of len(t) of the probabilty density function of the student-t distrobution"""
     numerator = gamma(((dof + 1) / 2))
     denomenator = ((dof * np.pi) ** 0.5) * gamma((dof / 2))
     x = 1 + ((t**2) / dof)
@@ -12,7 +12,8 @@ def pdf_student_t(dof, t):
     return (numerator / denomenator) * (x**exponent)
 
 
-def pdf_normal(x, mean, std_dev):
+def pdf_normal(x: np.array, mean: float, std_dev: float):
+    """returns a np.array of len(x) of the probabilty density function of the normal distrobution"""
     fraction = 1 / (std_dev * (np.sqrt(2 * np.pi)))
     exponent = -(0.5) * (((x - mean) / std_dev)) ** 2
     pdf = fraction * np.exp(exponent)
@@ -20,7 +21,8 @@ def pdf_normal(x, mean, std_dev):
 
 
 @njit(parallel=True)
-def cal_uncerts(t, pdf, std_devs):
+def cal_uncerts(t: np.array, pdf: np.array, std_devs: np.array):
+    """returns a np.array of len(std_devs) with the 2 sided cumulative probability from the mean and ourwards"""
     dt = t[1] - t[0]
     uncert = np.empty(len(std_devs))
     for j in prange(len(std_devs)):
@@ -34,7 +36,8 @@ def cal_uncerts(t, pdf, std_devs):
     return uncert
 
 
-def get_confidence_intervall(coverage_factor):
+def get_confidence_intervall(coverage_factor: float):
+    """returns the confidence intervall of a std.normal distributed with any given coverage factor or num. of std-devs"""
     x = np.linspace(-20, 20, 20000)
     # Std normal distrobution
     mean = 0
@@ -69,7 +72,7 @@ d_n = [
 ]
 
 
-def d(n):
+def d(n: int):
     """
     int n = the number of samples
     getting the convertion factor for better estimation of standard deviation for w (range of values) of the values.
@@ -207,10 +210,3 @@ def calculate_uncertanity(x, **params):
         "confidence_intervall": confidence_intervall,
     }
     return result
-
-
-if __name__ == "__main__":
-    x = np.array(
-        [1000.00, 1000.00, 1000.00, 1000.25, 999.75],
-    )
-    calculate_uncertanity(x, print_result=True)
