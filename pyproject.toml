@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "proving"
+version = "0.1.0"
+description = ""
+authors = ["StigHaraldGustavsen <stighg@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numba = "^0.56.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
