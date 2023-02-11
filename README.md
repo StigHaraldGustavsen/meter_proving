@@ -8,11 +8,8 @@ pip install meter-proving
 
 ```python
 from meter_proving.meter_proving import calculate_uncertanity
-import numpy as np
 
-x = np.array([1000.00, 1000.00, 1000.00, 1000.25, 999.75])
-
-res = calculate_uncertanity(x)
+res = calculate_uncertanity([1000.00, 1000.00, 1000.00, 1000.25, 999.75])
 print(res)
 ```
 
@@ -20,10 +17,25 @@ By default standard error is gotten from range of values, if this where to come 
 
 ```python
 from meter_proving.meter_proving import calculate_uncertanity
-import numpy as np
 
-x = np.array([1000.00, 1000.00, 1000.00, 1000.25, 999.75])
+res = calculate_uncertanity(
+    [1000.00, 1000.00, 1000.00, 1000.25, 999.75],
+    repetability = False
+    )
 
-res = calculate_uncertanity(x, repetability = False)
+print(res)
+```
+
+By default standard error standard deviation and has coverage factor of 1, witch gives a confidence interval of 68%
+
+```python
+from meter_proving.meter_proving import calculate_uncertanity
+
+res = calculate_uncertanity(
+    [1000.00, 1000.00, 1000.00, 1000.25, 999.75],
+    coverage_factor = 1.0,
+    repetability = False
+    )
+
 print(res)
 ```
