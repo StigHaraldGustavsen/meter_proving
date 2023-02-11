@@ -26,7 +26,7 @@ res = calculate_uncertanity(
 print(res)
 ```
 
-Standard error from standard deviation and has coverage factor of 1, witch gives a confidence interval of 68%
+Standard error from standard deviation and has coverage factor of 1, witch gives a confidence interval of approx 68%
 
 ```python
 from meter_proving.meter_proving import calculate_uncertanity
