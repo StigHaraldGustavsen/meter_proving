@@ -13,7 +13,7 @@ res = calculate_uncertanity([1000.00, 1000.00, 1000.00, 1000.25, 999.75])
 print(res)
 ```
 
-By default standard error is gotten from range of values, if this where to come from standard deviation set repetability param to false
+By default standard error is gotten from range of values, if this where to come from standard deviation set repetability param to false with a confidence intervall of 95% (coverage factor of almost 2), but theses can be parameterized.
 
 ```python
 from meter_proving.meter_proving import calculate_uncertanity
