@@ -1,3 +1,4 @@
+![Tests](https://github.com/mCodingLLC/SlapThatLikeButton-TestingStarterProject/actions/workflows/tests.yml/badge.svg)
 # Meter proving
 Simple package for caluclating random uncertanity of a set of repeted measurments.
 
