@@ -27,6 +27,7 @@ jobs:
         run: |
           pip install -U pip
           pip install poetry
+          poetry self update
           poetry config virtualenvs.in-project true
           poetry install
       - name: Run linting and other code quality checks
