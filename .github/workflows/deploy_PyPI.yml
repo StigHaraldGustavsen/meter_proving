@@ -1,0 +1,40 @@
+name: Tests
+on:
+  workflow_dispatch
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.10.9']
+    steps:
+      - uses: actions/checkout@v3
+        name: Set up Python ${{ matrix.python-version }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up cache
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ hashFiles('pyproject.toml') }}-${{ hashFiles('poetry.lock') }}
+
+      - name: Install and configure Poetry
+        run: |
+          pip install -U pip
+          pip install poetry
+          poetry config virtualenvs.in-project true
+          poetry config pypi-token.pypi ${{ secrets.PYPI }}
+          poetry install
+      - name: Run linting and other code quality checks
+        run: |
+          poetry run pre-commit run --all-files
+      - name: Run tests
+        run: export PYTHONPATH=$PYTHONPATH:$(pwd); poetry run pytest -c pyproject.toml
+      - name: Build
+        run: poetry build
+      - name: Depoly to PyPI
+        run: poetry publish

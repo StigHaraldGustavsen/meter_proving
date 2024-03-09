@@ -1,4 +1,4 @@
-from meter_proving.meter_proving import d, calculate_uncertanity
+from meter_proving import d, calculate_uncertanity
 import pytest
 import numpy as np
 

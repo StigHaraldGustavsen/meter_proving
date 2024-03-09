@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "meter_proving"
-version = "0.1.0"
+version = "1.0.0"
 description = "library to calculate random uncertanity of a measurment sequence"
 authors = ["StigHaraldGustavsen <stighg@gmail.com>"]
 readme = "README.md"

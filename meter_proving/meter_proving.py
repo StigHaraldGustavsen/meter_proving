@@ -3,7 +3,7 @@ from math import gamma
 from numba import njit, prange
 
 
-def pdf_student_t(dof: int, t: np.array):
+def pdf_student_t(dof: int, t: np.array) -> np.ndarray:
     """returns a np.array of len(t) of the probabilty density function of the student-t distrobution"""
     numerator = gamma(((dof + 1) / 2))
     denomenator = ((dof * np.pi) ** 0.5) * gamma((dof / 2))
@@ -12,7 +12,7 @@ def pdf_student_t(dof: int, t: np.array):
     return (numerator / denomenator) * (x**exponent)
 
 
-def pdf_normal(x: np.array, mean: float, std_dev: float):
+def pdf_normal(x: np.array, mean: float, std_dev: float) -> np.ndarray:
     """returns a np.array of len(x) of the probabilty density function of the normal distrobution"""
     fraction = 1 / (std_dev * (np.sqrt(2 * np.pi)))
     exponent = -(0.5) * (((x - mean) / std_dev)) ** 2
@@ -21,7 +21,7 @@ def pdf_normal(x: np.array, mean: float, std_dev: float):
 
 
 @njit(parallel=True)
-def cal_uncerts(t: np.array, pdf: np.array, std_devs: np.array):
+def cal_uncerts(t: np.array, pdf: np.array, std_devs: np.array) -> np.ndarray:
     """returns a np.array of len(std_devs) with the 2 sided cumulative probability from the mean and ourwards"""
     dt = t[1] - t[0]
     uncert = np.empty(len(std_devs))
@@ -72,7 +72,7 @@ d_n = [
 ]
 
 
-def d(n: int):
+def d(n: int) -> float:
     """
     int n = the number of samples
     getting the convertion factor for better estimation of standard deviation for w (range of values) of the values.
@@ -86,7 +86,7 @@ def d(n: int):
         return np.sqrt(n)
 
 
-def calculate_uncertanity(x, **params):
+def calculate_uncertanity(x, **params) -> dict:
     """
     x : list, np.ndarray of values
     params:
