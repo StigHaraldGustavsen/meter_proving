@@ -41,3 +41,16 @@ res = calculate_uncertanity(
 
 print(res)
 ```
+
+
+### Start dev
+```bash
+poetry install
+poetry config virtualenvs.in-project true
+poetry run pre-commit run --all-files
+```
+### Run precommits
+run precomits before you push code back to remote
+```bash
+poetry run pre-commit run --all-files
+```
