@@ -1,4 +1,4 @@
-name: Tests
+name: Deploy package to PyPI
 on:
   workflow_dispatch
 jobs:
